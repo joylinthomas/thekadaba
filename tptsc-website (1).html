@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Payers & Tax Savers Credit Co-operative Society Limited</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --light-yellow: #FFF9E3;
+            --yellow-accent: #FFE88C;
+            --light-red: #FFB3B3;
+            --red-accent: #FF6B6B;
+            --white: #FFFFFF;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-color: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: linear-gradient(135deg, #c54343 0%, var(--light-red) 100%);
+            padding: 2rem 3%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 5px 10px var(--shadow);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--yellow-accent) 0%, var(--light-red) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .logo-img img {
+            width: 170%;
+            height: 170%;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f1edede0;
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color:#dad9d6
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffe88c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FFFFFF;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #FFFFFF;
+        }
+
+        .member-login-btn {
+            background: linear-gradient(135deg, var(--red-accent) 0%, #ffe88c 100%);
+            color: var(--white);
+            padding: 0.7rem 1.8rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .member-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #ffe88c;
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #c54343 0%, var(--light-red) 100%);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 10px var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 8rem 8% 4rem;
+            background: linear-gradient(135deg, var(--light-yellow) 0%, var(--white) 100%);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 100%;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+            text-align: left;
+        }
+
+        .hero-content h1 span {
+            color: var(--red-accent);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            text-align: justify;
+            line-height: 1.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            flex: 1;
+            min-width: 200px;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow);
+            text-align: center;
+        }
+
+        .hero-stat h3 {
+            font-size: 2.5rem;
+            color: var(--red-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat p {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--red-accent) 0%, var(--light-red) 100%);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--red-accent);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            border: 2px solid var(--red-accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--red-accent);
+            color: var(--white);
+        }
+
+        .hero-image {
+            float: right;
+            width: 350px;
+            height: 350px;
+            margin: 0 0 2rem 3rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffe88c 100%);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title span {
+            color: var(--red-accent);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--red-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light-yellow);
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--red-accent) 0%, var(--light-red) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        /* Single static about image */
+        .about-image {
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px var(--shadow);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffe88c 100%);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            background: var(--light-yellow);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--red-accent) 0%, var(--yellow-accent) 100%);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.2);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--yellow-accent) 0%, var(--light-red) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .service-card ul {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .service-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-box {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light-yellow);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .benefit-box:hover {
+            background: var(--white);
+            box-shadow: 0 10px 30px var(--shadow);
+            transform: scale(1.05);
+        }
+
+        .benefit-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-box h4 {
+            font-size: 1.3rem;
+            color: var(--red-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-box p {
+            color: var(--text-light);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 6rem 5%;
+            background: var(--light-yellow);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffe88c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            padding: 20px;
+        }
+
+        /* ===== Committee Section ===== */
+        .committee {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .committee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .director-card {
+            background: var(--light-yellow);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 6px 20px var(--shadow);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .director-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--red-accent) 0%, var(--yellow-accent) 100%);
+        }
+
+        .director-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 14px 40px rgba(255, 107, 107, 0.2);
+            background: var(--white);
+        }
+
+        .director-photo {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            border: 3px solid var(--red-accent);
+            background: linear-gradient(135deg, var(--red-accent) 0%, var(--yellow-accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .director-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+
+        .director-photo .director-initials {
+            font-size: 2rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .director-card h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .director-card .director-role {
+            font-size: 0.82rem;
+            color: var(--red-accent);
+            font-weight: 500;
+        }
+
+        /* Chairman card bigger */
+        .director-card.chairman {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #fff0f0 0%, var(--light-yellow) 100%);
+        }
+
+        .director-card.chairman .director-photo {
+            width: 130px;
+            height: 130px;
+        }
+
+        .director-card.chairman h4 {
+            font-size: 1.15rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--red-accent) 0%, var(--light-red) 100%);
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .cta-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-form input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+
+        .cta-form button {
+            background: var(--white);
+            color: var(--red-accent);
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-form button:hover {
+            background: var(--yellow-accent);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--yellow-accent);
+        }
+
+        .footer-section p,
+        .footer-section li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--yellow-accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                padding-top: 8rem;
+                min-height: auto;
+            }
+
+            .hero-image {
+                float: none;
+                width: 150px;
+                height: 150px;
+                margin: 1rem auto;
+                display: block;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .director-card.chairman {
+                grid-column: span 1;
+            }
+
+            .committee-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-section">
+            <div class="logo-img"><img src="images/Logo.jpeg" alt="TPTSC Logo"></div>
+            <div class="logo-text">
+                <div class="logo-title">The Kadaba Tax Payers & Tax Savers</div>
+                <div class="logo-subtitle">Credit Co-operative Society Limited</div>
+            </div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <!-- <li><a href="#benefits">Benefits</a></li> -->
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#committee">Committee</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button class="member-login-btn">Member Login</button>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <br><br><br>
+            <h1>The Kadaba<span> Tax Payers & Tax Savers</span> Credit Co-operative Society</h1>
+            
+            <div class="hero-image">
+                <img src="images/logokadaba.jpeg">
+            </div>
+            
+            <p>The Tax Payers and Tax Savers Credit Co-operative Society Limited (Kadaba) is a localized financial institution that provides specialized banking and credit services specifically for its members in the Kadaba region. Unlike typical mutual benefit societies that focus on general community welfare, this society is designed as a strategic financial hub aimed at helping individuals manage their personal finances, optimize their tax liabilities, and grow their wealth.
+
+The society offers a range of secured investment and credit products including Fixed Deposits (FDs), Recurring Deposits (RDs), and Monthly Income Schemes (MIS), alongside quick-access credit facilities like Gold Loans and Property Loans. By operating as a registered credit cooperative under the Ministry of Corporate Affairs, it bridges the gap between traditional banking and tax-saving consultancy, ensuring that member funds are utilized for secured internal lending while providing higher interest returns on savings compared to standard commercial banks.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">Become a Member</button>
+                <button class="btn-secondary">Learn More</button>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <h3>15,000+</h3>
+                    <p>Active Members</p>
+                </div>
+                <div class="hero-stat">
+                    <h3>₹500Cr+</h3>
+                    <p>Assets Under Management</p>
+                </div>
+                <div class="hero-stat">
+                    <h3>25+</h3>
+                    <p>Years of Service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header">
+            <h2 class="section-title">About <span>Our Society</span></h2>
+            <p class="section-subtitle">Dedicated to serving tax payers and tax savers with excellence</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Who We Are</h3>
+                <p>The Tax Payers & Tax Savers Credit Co-operative Society Limited is a registered co-operative society committed to providing comprehensive financial services to our members. Established with the vision of promoting thrift and financial discipline among taxpayers, we have grown to become a trusted financial institution.</p>
+                <p>Our society operates on the principles of mutual cooperation, democratic management, and equitable distribution of benefits. We believe in empowering our members through accessible financial services and competitive returns.</p>
+                
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="feature-icon">✓</div>
+                        <div>
+                            <strong>RBI Registered</strong> - Fully regulated and compliant
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="feature-icon">✓</div>
+                        <div>
+                            <strong>Member-Owned</strong> - Run by members, for members
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="feature-icon">✓</div>
+                        <div>
+                            <strong>Secure & Trusted</strong> - Your money is safe with us
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single static image (no slider) -->
+            <div class="about-image">
+                <img src="images/corpus-fund.jpg" alt="About Our Society">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2 class="section-title">Our <span>Services</span></h2>
+            <p class="section-subtitle">Comprehensive financial solutions for all your needs</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3>Savings Accounts</h3>
+                <p>Flexible savings options with competitive interest rates</p>
+                <ul>
+                    <li>Regular Savings Account</li>
+                    <li>Recurring Deposits</li>
+                    <li>Fixed Deposits</li>
+                    <li>Daily Deposit Schemes</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Loan Services</h3>
+                <p>Easy loans at affordable interest rates</p>
+                <ul>
+                    <li>Personal Loans</li>
+                    <li>Home Loans</li>
+                    <li>Vehicle Loans</li>
+                    <li>Education Loans</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Investment Plans</h3>
+                <p>Grow your wealth with our investment schemes</p>
+                <ul>
+                    <li>Long-term Investment Plans</li>
+                    <li>Retirement Savings</li>
+                    <li>Child Education Plans</li>
+                    <li>Tax Saving Schemes</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💳</div>
+                <h3>Banking Services</h3>
+                <p>Modern banking facilities for members</p>
+                <ul>
+                    <li>Money Transfer</li>
+                    <li>Cheque Facilities</li>
+                    <li>Online Banking</li>
+                    <li>Mobile Banking</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>Insurance Services</h3>
+                <p>Protect your family and assets</p>
+                <ul>
+                    <li>Life Insurance</li>
+                    <li>Health Insurance</li>
+                    <li>Vehicle Insurance</li>
+                    <li>Property Insurance</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>Member Benefits</h3>
+                <p>Exclusive benefits for our members</p>
+                <ul>
+                    <li>Dividend Distribution</li>
+                    <li>Patronage Bonus</li>
+                    <li>Financial Education</li>
+                    <li>Community Events</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="section-header">
+            <h2 class="section-title">Why Choose <span>Us</span></h2>
+            <p class="section-subtitle">Experience the cooperative advantage</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-box">
+                <div class="benefit-icon">🎯</div>
+                <h4>Low Interest Rates</h4>
+                <p>Competitive loan rates that benefit our members</p>
+            </div>
+            <div class="benefit-box">
+                <div class="benefit-icon">📈</div>
+                <h4>High Returns</h4>
+                <p>Better interest rates on deposits and savings</p>
+            </div>
+            <div class="benefit-box">
+                <div class="benefit-icon">🔒</div>
+                <h4>Safe & Secure</h4>
+                <p>Your deposits are safe with proper regulations</p>
+            </div>
+            <div class="benefit-box">
+                <div class="benefit-icon">⚡</div>
+                <h4>Quick Processing</h4>
+                <p>Fast loan approvals and service delivery</p>
+            </div>
+            <div class="benefit-box">
+                <div class="benefit-icon">💪</div>
+                <h4>Member Ownership</h4>
+                <p>Every member has a voice in decision making</p>
+            </div>
+            <div class="benefit-box">
+                <div class="benefit-icon">🤝</div>
+                <h4>Community Focus</h4>
+                <p>We invest back in our community</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="section-header">
+            <h2 class="section-title">Our <span>Gallery</span></h2>
+            <p class="section-subtitle">Moments from our society</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img class="gallery-img" src="images/office1.jpeg" alt="Office">
+            </div>
+            <div class="gallery-item">
+                <img class="gallery-img" src="images/office2.jpeg" alt="Office">
+            </div>
+            <div class="gallery-item">
+                <img class="gallery-img" src="images/office3.jpeg" alt="Office">
+            </div>
+        </div>
+    </section>
+
+    <!-- Committee Section (replaces Testimonials) -->
+    <section class="committee" id="committee">
+        <div class="section-header">
+            <h2 class="section-title">Our <span>Committee</span></h2>
+            <p class="section-subtitle">Meet the board of directors leading our society</p>
+        </div>
+        <div class="committee-grid">
+
+            <!-- Director 1 – Chairman (spans 2 cols on desktop) -->
+            <div class="director-card chairman">
+                <div class="director-photo">
+                    <img src="images/Sathish.jpeg" alt="Chairman"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">CH</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Chairman</div>
+            </div>
+
+            <!-- Director 2 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/Krishnappa.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D2</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Vice Chairman</div>
+            </div>
+
+            <!-- Director 3 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/Adam.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D3</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Secretary</div>
+            </div>
+
+            <!-- Director 4 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director4.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D4</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Treasurer</div>
+            </div>
+
+            <!-- Director 5 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director5.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D5</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+            <!-- Director 6 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director6.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D6</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+            <!-- Director 7 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director7.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D7</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+            <!-- Director 8 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director8.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D8</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+            <!-- Director 9 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director9.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D9</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+            <!-- Director 10 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director10.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D10</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+            <!-- Director 11 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director11.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D11</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+            <!-- Director 12 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director12.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D12</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+            <!-- Director 13 -->
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/director13.jpeg" alt="Director"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D13</span>
+                </div>
+                <h4>Director Name</h4>
+                <div class="director-role">Director</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <h2>Ready to Join Our Growing Family?</h2>
+        <p>Become a member today and start your journey towards financial prosperity</p>
+        <div class="cta-form">
+            <input type="email" placeholder="Enter your email address">
+            <button>Get Started</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About TPTSC</h3>
+                <p>The Tax Payers & Tax Savers Credit Co-operative Society Limited is committed to providing excellent financial services to our members.</p>
+                <p><strong>Reg. No:</strong> TPTSC/2000/12345</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#benefits">Membership Benefits</a></li>
+                    <li><a href="#committee">Our Committee</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>📍 123 Main Street, Financial District</p>
+                <p>📞 +91 12345 67890</p>
+                <p>📧 info@tptsc.org</p>
+                <p>⏰ Mon - Sat: 9:00 AM - 6:00 PM</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Stay connected with us on social media</p>
+                <div style="display: flex; gap: 1rem; font-size: 1.5rem; margin-top: 1rem;">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📷</a>
+                    <a href="#">💼</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Tax Payers & Tax Savers Credit Co-operative Society Limited. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
