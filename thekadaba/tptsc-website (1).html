@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Payers & Tax Savers Credit Co-operative Society Limited</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --light-yellow: #FFF9E3;
+            --yellow-accent: #FFE88C;
+            --light-red: #FFB3B3;
+            --red-accent: #FF6B6B;
+            --white: #FFFFFF;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --shadow: rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; width: 100%;
+            background: linear-gradient(135deg, #c54343 0%, var(--light-red) 100%);
+            padding: 1rem 3%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            box-shadow: 0 5px 10px var(--shadow);
+        }
+
+        .logo-section { display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 0; }
+
+        .logo-img {
+            width: 60px; height: 60px; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--yellow-accent) 0%, var(--light-red) 100%);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .logo-img img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+
+        .logo-text { display: flex; flex-direction: column; min-width: 0; }
+        .logo-title { font-size: 1.1rem; font-weight: bold; color: #f1eded; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .logo-subtitle { font-size: 0.72rem; color: #dad9d6; white-space: nowrap; }
+
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+        .nav-links a {
+            color: #ffe88c; text-decoration: none; font-weight: 500; font-size: 0.93rem;
+            transition: all 0.3s; position: relative; white-space: nowrap;
+        }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #fff; transition: width 0.3s; }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: #fff; }
+
+        .nav-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+
+        .member-login-btn {
+            background: linear-gradient(135deg, var(--red-accent) 0%, #ffe88c 100%);
+            color: var(--white); padding: 0.6rem 1.4rem; border-radius: 25px; border: none;
+            cursor: pointer; font-weight: 600; font-size: 0.88rem; transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3); white-space: nowrap;
+        }
+        .member-login-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,107,0.4); }
+
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #ffe88c; line-height: 1; }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh; padding: 8rem 8% 4rem;
+            background: linear-gradient(135deg, var(--light-yellow) 0%, var(--white) 100%);
+            display: flex; align-items: center;
+        }
+        .hero-content { max-width: 100%; width: 100%; }
+        .hero-content h1 { font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.3; }
+        .hero-content h1 span { color: var(--red-accent); }
+        .hero-content p { font-size: 1.1rem; color: var(--text-light); margin-bottom: 1.5rem; text-align: justify; line-height: 1.9; }
+
+        .hero-image {
+            float: right; width: 320px; height: 320px; margin: 0 0 2rem 3rem;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffe88c 100%);
+        }
+        .hero-image img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+
+        .hero-buttons { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--red-accent) 0%, var(--light-red) 100%);
+            color: var(--white); padding: 0.9rem 2rem; border-radius: 30px; border: none;
+            font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(255,107,107,0.4); }
+
+        .btn-secondary {
+            background: var(--white); color: var(--red-accent); padding: 0.9rem 2rem;
+            border-radius: 30px; border: 2px solid var(--red-accent);
+            font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-secondary:hover { background: var(--red-accent); color: var(--white); }
+
+        /* ── INFO PANEL — 4 columns ── */
+        .info-panel { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; border-radius: 0; overflow: visible; box-shadow: none; }
+
+        .info-col { display: flex; flex-direction: column; background: var(--white); border-radius: 12px; box-shadow: 0 4px 15px var(--shadow); overflow: hidden; }
+        
+
+        .info-col-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.9rem 1rem; background: linear-gradient(135deg, #c54343 0%, var(--light-red) 100%); }
+        .info-col-header .col-icon { font-size: 1.1rem; }
+        .info-col-header h4 { font-size: 0.82rem; font-weight: 700; color: #ffe88c; margin: 0; white-space: nowrap; }
+
+        .info-col-body { flex: 1; height: 120px; overflow: hidden; padding: 0; position: relative; }
+        .info-col-body::-webkit-scrollbar { display: none; }
+        
+        /* ── UNIFIED TICKER for all 4 columns ── */
+        .col-ticker { height: 120px; overflow: hidden; position: relative; }
+        .col-ticker-inner { display: flex; flex-direction: column; transition: transform 0.5s ease; }
+        .ticker-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.38rem 0.8rem; border-bottom: 1px dashed #f0e0e0; min-height: 30px; flex-shrink: 0; font-size: 0.78rem; color: var(--text-dark); }
+        .ticker-row:last-child { border-bottom: none; }
+        .ticker-row a { color: var(--text-dark); text-decoration: none; flex: 1; }
+        .ticker-row a:hover { color: var(--red-accent); }
+        .ticker-row .t-icon { font-size: 0.9rem; flex-shrink: 0; }
+        .ticker-row .t-arrow { margin-left: auto; color: var(--text-light); font-size: 0.7rem; flex-shrink: 0; }
+        .ticker-row .t-rate { margin-left: auto; font-weight: 700; color: #27ae60; flex-shrink: 0; }
+        .ticker-row .t-dl { margin-left: auto; font-size: 0.65rem; font-weight: 600; color: var(--red-accent); background: #fff0f0; padding: 0.1rem 0.4rem; border-radius: 20px; flex-shrink: 0; }
+        .ann-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red-accent); flex-shrink: 0; margin-top: 2px; }
+        .ann-dot.new { background: #27ae60; }
+        .ann-dot.imp { background: #e67e22; }
+        .ann-badge { font-size: 0.6rem; font-weight: 700; padding: 0.1rem 0.35rem; border-radius: 20px; margin-left: 0.3rem; }
+        .badge-new { background: #d4efdf; color: #1e8449; }
+        .badge-imp { background: #fdebd0; color: #a04000; }
+        .ann-date { font-size: 0.65rem; color: var(--text-light); display: block; margin-top: 1px; }
+        @media (max-width: 968px) {
+            .info-panel { grid-template-columns: repeat(2, 1fr); }
+            
+        }
+        @media (max-width: 600px) {
+            .info-panel { grid-template-columns: 1fr; }
+            
+            .info-col-body { height: 100px; }
+        }
+
+        /* ── SHARED ── */
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-title { font-size: 2.6rem; color: var(--text-dark); margin-bottom: 0.8rem; }
+        .section-title span { color: var(--red-accent); }
+        .section-subtitle { font-size: 1.1rem; color: var(--text-light); }
+
+        /* ── ABOUT ── */
+        /* Mission / Vision / Commitments */
+        .about { padding: 5rem 5%; background: var(--white); }
+        .mvc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-bottom: 0; }
+        .mvc-card { border-radius: 20px; padding: 2rem; position: relative; overflow: hidden; }
+        .mvc-card.mission { background: linear-gradient(135deg, #fff0f0 0%, #ffe8e8 100%); border-left: 5px solid var(--red-accent); }
+        .mvc-card.vision  { background: linear-gradient(135deg, #fffbea 0%, #fff3c4 100%); border-left: 5px solid #f0b400; }
+        .mvc-card-icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+        .mvc-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .mvc-card.mission h3 { color: var(--red-accent); }
+        .mvc-card.vision h3  { color: #b8860b; }
+        .mvc-card p { font-size: 0.97rem; color: var(--text-light); line-height: 1.8; text-align: justify; }
+        .mvc-commit { border-radius: 20px; padding: 2rem; background: linear-gradient(135deg, #fff0f0 0%, #ffe8e8 100%); border-left: 5px solid var(--red-accent); height: 100%; }
+        .mvc-commit h3 { font-size: 1.4rem; font-weight: 700; color: var(--red-accent); margin-bottom: 1.2rem; }
+        .commit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .commit-item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.9rem; background: var(--white); border-radius: 12px; box-shadow: 0 3px 10px var(--shadow); transition: transform 0.2s; }
+        .commit-item:hover { transform: translateY(-3px); }
+        .ci-icon { width: 38px; height: 38px; flex-shrink: 0; background: linear-gradient(135deg, #27ae60, #82e0aa); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .commit-item div strong { display: block; font-size: 0.88rem; color: var(--text-dark); margin-bottom: 0.2rem; }
+        .commit-item div span { font-size: 0.78rem; color: var(--text-light); line-height: 1.4; }
+
+        /* ── SERVICES ── */
+        .services { padding: 5rem 5%; background: var(--light-yellow); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .service-card { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px var(--shadow); transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--red-accent) 0%, var(--yellow-accent) 100%); }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 15px 50px rgba(255,107,107,0.2); }
+        .service-icon { width: 65px; height: 65px; background: linear-gradient(135deg, var(--yellow-accent) 0%, var(--light-red) 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin-bottom: 1.2rem; }
+        .service-card h3 { font-size: 1.3rem; color: var(--text-dark); margin-bottom: 0.8rem; }
+        .service-card p { color: var(--text-light); line-height: 1.7; }
+        .service-card ul { margin-top: 0.8rem; padding-left: 1.4rem; color: var(--text-light); }
+        .service-card li { margin-bottom: 0.4rem; }
+
+        /* ── BENEFITS ── */
+        .benefits { padding: 5rem 5%; background: var(--white); }
+        .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .benefit-box { text-align: center; padding: 1.8rem; background: var(--light-yellow); border-radius: 15px; transition: all 0.3s; }
+        .benefit-box:hover { background: var(--white); box-shadow: 0 10px 30px var(--shadow); transform: scale(1.05); }
+        .benefit-icon { font-size: 3.5rem; margin-bottom: 0.8rem; }
+        .benefit-box h4 { font-size: 1.15rem; color: var(--red-accent); margin-bottom: 0.4rem; }
+        .benefit-box p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* ── GALLERY ── */
+        .gallery { padding: 5rem 5%; background: var(--light-yellow); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+        .gallery-item { height: 260px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px var(--shadow); transition: all 0.3s; cursor: pointer; background: linear-gradient(135deg, #ff6b6b 0%, #ffe88c 100%); }
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-img { width: 100%; height: 100%; object-fit: fill; padding: 15px; }
+
+        /* ── COMMITTEE ── */
+        .committee { padding: 5rem 5%; background: var(--white); }
+        .committee-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .director-card { background: var(--light-yellow); border-radius: 18px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 6px 20px var(--shadow); transition: all 0.3s; position: relative; overflow: hidden; }
+        .director-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--red-accent) 0%, var(--yellow-accent) 100%); }
+        .director-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(255,107,107,0.2); background: var(--white); }
+        .director-photo { width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 1rem; overflow: hidden; border: 3px solid var(--red-accent); background: linear-gradient(135deg, var(--red-accent) 0%, var(--yellow-accent) 100%); display: flex; align-items: center; justify-content: center; }
+        .director-photo img { width: 100%; height: 100%; object-fit: fill; }
+        .director-initials { font-size: 1.8rem; color: var(--white); font-weight: 700; }
+        .director-card h4 { font-size: 0.95rem; color: var(--text-dark); font-weight: 600; margin-bottom: 0.3rem; }
+        .director-role { font-size: 0.8rem; color: var(--red-accent); font-weight: 500; }
+        .director-card.chairman { grid-column: span 2; background: linear-gradient(135deg, #fff0f0 0%, var(--light-yellow) 100%); }
+        .director-card.chairman .director-photo { width: 120px; height: 120px; }
+        .director-card.chairman h4 { font-size: 1.1rem; }
+
+        /* ── ENQUIRY ── */
+        .enquiry { padding: 5rem 5%; background: linear-gradient(135deg, #fff5f5 0%, var(--light-yellow) 100%); }
+        .enquiry-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+        .enquiry-info h3 { font-size: 1.6rem; color: var(--red-accent); margin-bottom: 1rem; }
+        .enquiry-info p { font-size: 1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem; }
+        .enquiry-contact-item { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1rem; background: var(--white); border-radius: 12px; margin-bottom: 0.8rem; box-shadow: 0 3px 12px var(--shadow); }
+        .eq-icon { width: 42px; height: 42px; flex-shrink: 0; background: linear-gradient(135deg, var(--red-accent) 0%, var(--light-red) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .enquiry-contact-item a { color: var(--text-dark); text-decoration: none; font-weight: 500; font-size: 0.95rem; word-break: break-all; }
+        .enquiry-contact-item a:hover { color: var(--red-accent); }
+        .enquiry-contact-item span { color: var(--text-dark); font-weight: 500; font-size: 0.95rem; }
+        .enquiry-form-box { background: var(--white); border-radius: 24px; padding: 2.5rem; box-shadow: 0 10px 40px var(--shadow); position: relative; overflow: hidden; }
+        .enquiry-form-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--red-accent) 0%, var(--yellow-accent) 100%); }
+        .enquiry-form-box h3 { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 1.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+        .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-dark); }
+        .form-group input, .form-group select, .form-group textarea { padding: 0.8rem 1rem; border: 1.5px solid #e0e0e0; border-radius: 10px; font-size: 0.95rem; font-family: inherit; color: var(--text-dark); transition: border-color 0.3s; outline: none; background: #fafafa; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--red-accent); background: var(--white); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .enquiry-submit-btn { width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--red-accent) 0%, var(--light-red) 100%); color: var(--white); border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255,107,107,0.3); letter-spacing: 0.5px; }
+        .enquiry-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(255,107,107,0.4); }
+
+        /* ── FOOTER ── */
+        footer { background: var(--text-dark); color: var(--white); padding: 4rem 5% 2rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; margin-bottom: 2.5rem; }
+        .footer-section h3 { font-size: 1.2rem; margin-bottom: 1.2rem; color: var(--yellow-accent); }
+        .footer-section p, .footer-section li { color: rgba(255,255,255,0.8); margin-bottom: 0.7rem; font-size: 0.95rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--yellow-accent); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+
+        /* ════════════════════════════════════
+           RESPONSIVE  ≤ 968px  (Tablet)
+        ════════════════════════════════════ */
+        @media (max-width: 968px) {
+            nav { padding: 0.9rem 4%; }
+            .logo-img { width: 46px; height: 46px; }
+            .logo-title { font-size: 0.95rem; }
+            .logo-subtitle { font-size: 0.65rem; }
+            .member-login-btn { padding: 0.5rem 1.1rem; font-size: 0.82rem; }
+            .mobile-menu-btn { display: block; }
+
+            .nav-links {
+                display: none; position: absolute; top: 100%; left: 0; right: 0;
+                background: linear-gradient(135deg, #c54343 0%, var(--light-red) 100%);
+                flex-direction: column; padding: 1.5rem 2rem; gap: 1rem;
+                box-shadow: 0 4px 10px var(--shadow);
+            }
+            .nav-links.active { display: flex; }
+
+            .hero { padding: 7rem 5% 3rem; min-height: auto; }
+            .hero-image { float: none; width: 180px; height: 180px; margin: 1rem auto 1.5rem; display: block; }
+            .hero-content h1 { font-size: 1.9rem; }
+            .hero-content p { font-size: 1rem; }
+
+            .section-title { font-size: 2rem; }
+            .mvc-grid { grid-template-columns: 1fr; }
+
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .committee-grid { grid-template-columns: repeat(3, 1fr); }
+            .director-card.chairman { grid-column: span 3; }
+
+            .cta h2 { font-size: 2rem; }
+            .cta-form { flex-direction: column; align-items: center; }
+            .cta-form input, .cta-form button { width: 100%; max-width: 420px; }
+            .enquiry-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+
+            .footer-content { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        }
+
+        /* ════════════════════════════════════
+           RESPONSIVE  ≤ 600px  (Mobile)
+        ════════════════════════════════════ */
+        @media (max-width: 600px) {
+            nav { padding: 0.7rem 4%; }
+            .logo-img { width: 40px; height: 40px; }
+            .logo-title { font-size: 0.82rem; }
+            .logo-subtitle { font-size: 0.6rem; }
+            .member-login-btn { display: none; }
+
+            .hero { padding: 5.5rem 4% 2.5rem; }
+            .hero-content h1 { font-size: 1.4rem; text-align: center; }
+            .hero-image { width: 140px; height: 140px; }
+            .hero-content p { font-size: 0.92rem; }
+            .hero-buttons { flex-direction: column; }
+            .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+            .hero-stats-placeholder { display: none; }
+
+            .about, .services, .benefits, .gallery, .committee, .enquiry { padding: 3rem 4%; }
+            .cta { padding: 3rem 4%; }
+            .section-title { font-size: 1.6rem; }
+            .section-subtitle { font-size: 0.9rem; }
+            .section-header { margin-bottom: 2rem; }
+
+            .commit-grid { grid-template-columns: 1fr; } .mvc-card, .mvc-commit { padding: 1.3rem; }
+
+            .benefits-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { padding: 1.5rem; }
+
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item { height: 200px; }
+
+            .committee-grid { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+            .director-card.chairman { grid-column: span 2; }
+            .director-photo { width: 78px; height: 78px; }
+            .director-card.chairman .director-photo { width: 90px; height: 90px; }
+            .director-card { padding: 1rem 0.7rem; }
+            .director-card h4 { font-size: 0.8rem; }
+            .director-role { font-size: 0.7rem; }
+            .director-initials { font-size: 1.5rem; }
+
+            .cta h2 { font-size: 1.5rem; }
+            .cta p { font-size: 0.95rem; }
+            .enquiry-form-box { padding: 1.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+
+            .footer-content { grid-template-columns: 1fr; gap: 1.5rem; }
+            footer { padding: 2.5rem 4% 1.5rem; }
+        }
+
+        /* ════════════════════════════════════
+           RESPONSIVE  ≤ 380px  (Extra Small)
+        ════════════════════════════════════ */
+        @media (max-width: 380px) {
+            .logo-title { font-size: 0.72rem; }
+            .logo-subtitle { display: none; }
+            .hero-content h1 { font-size: 1.2rem; }
+            .section-title { font-size: 1.4rem; }
+            .committee-grid { grid-template-columns: repeat(2, 1fr); }
+            .director-card.chairman { grid-column: span 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-section">
+            <div class="logo-img"><img src="images/Logo.jpeg" alt="TPTSC Logo"></div>
+            <div class="logo-text">
+                <div class="logo-title">The Kadaba Tax Payers & Tax Savers</div>
+                <div class="logo-subtitle">Credit Co-operative Society Limited</div>
+            </div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#committee">Committee</a></li>
+            <li style="margin-left:1.2rem;"><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="member-login-btn">Member Login</button>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <script>
+        // Unified ticker for all 4 columns — shows 3 rows, slides 1 at a time
+        window.addEventListener('load', function() {
+            var tickerIds = ['ticker-ann', 'ticker-links', 'ticker-rates', 'ticker-dl'];
+            var rowH = 30;
+            var visible = 3;
+            tickerIds.forEach(function(id) {
+                var inner = document.getElementById(id);
+                if (!inner) return;
+                var total = inner.querySelectorAll('.ticker-row').length;
+                var current = 0;
+                setInterval(function() {
+                    current++;
+                    if (current > total - visible) current = 0;
+                    inner.style.transform = 'translateY(-' + (current * rowH) + 'px)';
+                }, 2000);
+            });
+        });
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+        window.addEventListener('scroll', () => {
+            let current = '';
+            document.querySelectorAll('section[id]').forEach(s => {
+                if (scrollY >= s.offsetTop - 200) current = s.getAttribute('id');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+        function submitEnquiry() {
+            var name = document.getElementById('eq-name').value.trim();
+            var phone = document.getElementById('eq-phone').value.trim();
+            var email = document.getElementById('eq-email').value.trim();
+            var message = document.getElementById('eq-message').value.trim();
+            if (!name || !phone || !email || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            var subject = document.getElementById('eq-subject').value || 'General Enquiry';
+            var body = 'Name: ' + name + '\nPhone: ' + phone + '\nEmail: ' + email + '\nSubject: ' + subject + '\n\nMessage:\n' + message;
+            window.location.href = 'mailto:thekadaba@tktptscredit.com?subject=Enquiry: ' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        }
+    </script>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <br><br>
+            <h1>The Kadaba<span> Tax Payers & Tax Savers</span> Credit Co-operative Society</h1>
+
+            <div class="hero-image">
+                <img src="images/logokadaba.jpeg" alt="Society Logo">
+            </div>
+
+            <p>The Tax Payers and Tax Savers Credit Co-operative Society Limited (Kadaba) is a localized financial institution that provides specialized banking and credit services specifically for its members in the Kadaba region. Unlike typical mutual benefit societies that focus on general community welfare, this society is designed as a strategic financial hub aimed at helping individuals manage their personal finances, optimize their tax liabilities, and grow their wealth.</p>
+
+            <p>The society offers a range of secured investment and credit products including Fixed Deposits (FDs), Recurring Deposits (RDs), and Monthly Income Schemes (MIS), alongside quick-access credit facilities like Gold Loans and Property Loans. By operating as a registered credit cooperative under the Ministry of Corporate Affairs, it bridges the gap between traditional banking and tax-saving consultancy, ensuring that member funds are utilized for secured internal lending while providing higher interest returns on savings compared to standard commercial banks.</p>
+
+            <div class="hero-buttons">
+                <button class="btn-primary">Become a Member</button>
+                <button class="btn-secondary">Learn More</button>
+            </div>
+            <!-- Info Panel: 4 Columns -->
+            <div class="info-panel">
+
+                <!-- Col 1: Announcements -->
+                <div class="info-col">
+                    <div class="info-col-header"><span class="col-icon">📢</span><h4>Announcements</h4></div>
+                    <div class="info-col-body" style="height:120px;overflow:hidden;padding:0;">
+                        <div class="col-ticker"><div class="col-ticker-inner" id="ticker-ann">
+                            <div class="ticker-row"><div class="ann-dot new"></div>&nbsp;AGM on 15th April 2025, Society Hall.<span class="ann-badge badge-new">NEW</span></div>
+                            <div class="ticker-row"><div class="ann-dot imp"></div>&nbsp;Revised FD rates from 1st April 2025.<span class="ann-badge badge-imp">IMP</span></div>
+                            <div class="ticker-row"><div class="ann-dot"></div>&nbsp;New MIS — earn up to 9.5% p.a.</div>
+                            <div class="ticker-row"><div class="ann-dot"></div>&nbsp;Office closed 26th Jan 2025.</div>
+                            <div class="ticker-row"><div class="ann-dot new"></div>&nbsp;Gold Loan processed same day.<span class="ann-badge badge-new">NEW</span></div>
+                            <div class="ticker-row"><div class="ann-dot"></div>&nbsp;FY 2023–24 dividend credited to members.</div>
+                        </div></div>
+                    </div>
+                </div>
+
+                <!-- Col 2: Useful Links -->
+                <div class="info-col">
+                    <div class="info-col-header"><span class="col-icon">🔗</span><h4>Useful Links</h4></div>
+                    <div class="info-col-body" style="height:120px;overflow:hidden;padding:0;">
+                        <div class="col-ticker"><div class="col-ticker-inner" id="ticker-links">
+                            <div class="ticker-row"><span class="t-icon">🏦</span><a href="https://www.rbi.org.in" target="_blank">Reserve Bank of India</a><span class="t-arrow">↗</span></div>
+                            <div class="ticker-row"><span class="t-icon">🏛️</span><a href="https://www.mca.gov.in" target="_blank">Ministry of Corporate Affairs</a><span class="t-arrow">↗</span></div>
+                            <div class="ticker-row"><span class="t-icon">📋</span><a href="https://www.incometax.gov.in" target="_blank">Income Tax e-Filing</a><span class="t-arrow">↗</span></div>
+                            <div class="ticker-row"><span class="t-icon">⚖️</span><a href="https://www.ncdrc.nic.in" target="_blank">Consumer Disputes Redressal</a><span class="t-arrow">↗</span></div>
+                            <div class="ticker-row"><span class="t-icon">🗺️</span><a href="https://www.karnataka.gov.in" target="_blank">Government of Karnataka</a><span class="t-arrow">↗</span></div>
+                            <div class="ticker-row"><span class="t-icon">💸</span><a href="https://www.neft.rbi.org.in" target="_blank">RBI — NEFT / RTGS Info</a><span class="t-arrow">↗</span></div>
+                        </div></div>
+                    </div>
+                </div>
+
+                <!-- Col 3: Interest Rates -->
+                <div class="info-col">
+                    <div class="info-col-header"><span class="col-icon">📊</span><h4>Interest Rates</h4></div>
+                    <div class="info-col-body" style="height:120px;overflow:hidden;padding:0;">
+                        <div class="col-ticker"><div class="col-ticker-inner" id="ticker-rates">
+                            <div class="ticker-row"><span class="t-icon">📌</span>FD — 1 Year<span class="t-rate">8.50%</span></div>
+                            <div class="ticker-row"><span class="t-icon">📌</span>FD — 2 Years<span class="t-rate">9.00%</span></div>
+                            <div class="ticker-row"><span class="t-icon">📌</span>FD — 3 Years<span class="t-rate">9.25%</span></div>
+                            <div class="ticker-row"><span class="t-icon">📌</span>RD — 12 Months<span class="t-rate">8.00%</span></div>
+                            <div class="ticker-row"><span class="t-icon">📌</span>MIS — 24 Months<span class="t-rate">9.50%</span></div>
+                            <div class="ticker-row"><span class="t-icon">📌</span>Savings Account<span class="t-rate">5.00%</span></div>
+                            <div class="ticker-row"><span class="t-icon">📌</span>Gold Loan<span class="t-rate" style="color:#e67e22;">12.00%</span></div>
+                            <div class="ticker-row"><span class="t-icon">📌</span>Property Loan<span class="t-rate" style="color:#e67e22;">13.50%</span></div>
+                        </div></div>
+                    </div>
+                </div>
+
+                <!-- Col 4: Downloads -->
+                <div class="info-col">
+                    <div class="info-col-header"><span class="col-icon">📥</span><h4>Downloads</h4></div>
+                    <div class="info-col-body" style="height:120px;overflow:hidden;padding:0;">
+                        <div class="col-ticker"><div class="col-ticker-inner" id="ticker-dl">
+                            <div class="ticker-row"><span class="t-icon">📄</span>Membership Application<span class="t-dl">⬇</span></div>
+                            <div class="ticker-row"><span class="t-icon">📄</span>FD Opening Form<span class="t-dl">⬇</span></div>
+                            <div class="ticker-row"><span class="t-icon">📄</span>Loan Application Form<span class="t-dl">⬇</span></div>
+                            <div class="ticker-row"><span class="t-icon">📄</span>Annual Report 2023–24<span class="t-dl">⬇</span></div>
+                            <div class="ticker-row"><span class="t-icon">📄</span>Nomination Form<span class="t-dl">⬇</span></div>
+                        </div></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- About: Mission, Vision & Commitments -->
+    <section class="about" id="about">
+        <div class="section-header">
+            <h2 class="section-title">Our <span>Mission, Vision & Commitments</span></h2>
+            <p class="section-subtitle">The values and principles that guide everything we do</p>
+        </div>
+
+        <!-- Mission & Vision side by side -->
+        <div class="mvc-grid">
+            <div class="mvc-card mission">
+                <span class="mvc-card-icon">🎯</span>
+                <h3>Our Mission</h3>
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li style="font-size:0.95rem;color:var(--text-light);line-height:1.7;">To create a financially strong and self-reliant member community by:</li>
+                    <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.93rem;color:var(--text-light);"><span style="color:var(--red-accent);font-weight:700;flex-shrink:0;">→</span> Encouraging systematic savings</li>
+                    <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.93rem;color:var(--text-light);"><span style="color:var(--red-accent);font-weight:700;flex-shrink:0;">→</span> Offering affordable and transparent credit facilities</li>
+                    <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.93rem;color:var(--text-light);"><span style="color:var(--red-accent);font-weight:700;flex-shrink:0;">→</span> Promoting financial responsibility and tax awareness</li>
+                    <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.93rem;color:var(--text-light);"><span style="color:var(--red-accent);font-weight:700;flex-shrink:0;">→</span> Ensuring ethical and member-centric banking practices</li>
+                </ul>
+            </div>
+            <div class="mvc-card vision">
+                <span class="mvc-card-icon">🔭</span>
+                <h3>Our Vision</h3>
+                <p>To become a trusted and progressive co-operative financial institution known for integrity, stability, and member prosperity. Building a future where every member achieves financial independence.</p>
+            </div>
+            <div class="mvc-commit">
+                <h3>🤝 Our Commitment</h3>
+                <p style="font-size:1rem;color:var(--text-light);line-height:1.9;">At <strong>The Kadaba Tax Payers &amp; Tax Savers Credit Co-Operative Society Limited</strong>, we believe that financial growth begins with disciplined savings and responsible borrowing. We are dedicated to supporting our members at every stage of their financial journey with <em>integrity</em>, <em>professionalism</em>, and <em>care</em>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2 class="section-title">Our <span>Services</span></h2>
+            <p class="section-subtitle">Comprehensive financial solutions for all your needs</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3>Savings Accounts</h3>
+                <p>Flexible savings options with competitive interest rates</p>
+                <ul><li>Regular Savings Account</li><li>Recurring Deposits</li><li>Fixed Deposits</li><li>Daily Deposit Schemes</li></ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Loan Services</h3>
+                <p>Easy loans at affordable interest rates</p>
+                <ul><li>Personal Loans</li><li>Home Loans</li><li>Vehicle Loans</li><li>Education Loans</li></ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Investment Plans</h3>
+                <p>Grow your wealth with our investment schemes</p>
+                <ul><li>Long-term Investment Plans</li><li>Retirement Savings</li><li>Child Education Plans</li><li>Tax Saving Schemes</li></ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💳</div>
+                <h3>Banking Services</h3>
+                <p>Modern banking facilities for members</p>
+                <ul><li>Money Transfer</li><li>Cheque Facilities</li><li>Online Banking</li><li>Mobile Banking</li></ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>Insurance Services</h3>
+                <p>Protect your family and assets</p>
+                <ul><li>Life Insurance</li><li>Health Insurance</li><li>Vehicle Insurance</li><li>Property Insurance</li></ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>Member Benefits</h3>
+                <p>Exclusive benefits for our members</p>
+                <ul><li>Dividend Distribution</li><li>Patronage Bonus</li><li>Financial Education</li><li>Community Events</li></ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits" id="benefits">
+        <div class="section-header">
+            <h2 class="section-title">Why Choose <span>Us</span></h2>
+            <p class="section-subtitle">Experience the cooperative advantage</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-box"><div class="benefit-icon">🎯</div><h4>Low Interest Rates</h4><p>Competitive loan rates that benefit our members</p></div>
+            <div class="benefit-box"><div class="benefit-icon">📈</div><h4>High Returns</h4><p>Better interest rates on deposits and savings</p></div>
+            <div class="benefit-box"><div class="benefit-icon">🔒</div><h4>Safe & Secure</h4><p>Your deposits are safe with proper regulations</p></div>
+            <div class="benefit-box"><div class="benefit-icon">⚡</div><h4>Quick Processing</h4><p>Fast loan approvals and service delivery</p></div>
+            <div class="benefit-box"><div class="benefit-icon">💪</div><h4>Member Ownership</h4><p>Every member has a voice in decision making</p></div>
+            <div class="benefit-box"><div class="benefit-icon">🤝</div><h4>Community Focus</h4><p>We invest back in our community</p></div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="section-header">
+            <h2 class="section-title">Our <span>Gallery</span></h2>
+            <p class="section-subtitle">Moments from our society</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img class="gallery-img" src="images/office1.jpeg" alt="Office"></div>
+            <div class="gallery-item"><img class="gallery-img" src="images/office2.jpeg" alt="Office"></div>
+            <div class="gallery-item"><img class="gallery-img" src="images/office3.jpeg" alt="Office"></div>
+        </div>
+    </section>
+
+        <!-- Committee -->
+    <section class="committee" id="committee">
+        <div class="section-header">
+            <h2 class="section-title">Our <span>Committee</span></h2>
+            <p class="section-subtitle">Meet the board of directors leading our society</p>
+        </div>
+        <div class="committee-grid">
+
+            <div class="director-card chairman">
+                <div class="director-photo">
+                    <img src="images/Sathish.jpeg" alt="Chairman" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">CH</span>
+                </div>
+                <h4>S Sathish Nayak</h4><div class="director-role">Chairman</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/Krishnappa_formal.jpeg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D2</span>
+                </div>
+                <h4>K Krishnappa Madivala</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/adam.jpg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D3</span>
+                </div>
+                <h4>K Adam</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/alice.jpg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D4</span>
+                </div>
+                <h4>Alice Chacko</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/balakrishna-professional.jpg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D5</span>
+                </div>
+                <h4>K S Balakrishna Gowda</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/DSC_8522_formal.jpeg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D6</span>
+                </div>
+                <h4>Chandrashekara Gowda</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/DSC_8546_formal.jpeg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D7</span>
+                </div>
+                <h4>Jagannatha G</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/DSC_8540_formal.jpeg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D8</span>
+                </div>
+                <h4>Kumara Naika K</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/ashok-professional.jpg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D9</span>
+                </div>
+                <h4>Ashok Kumar</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/DSC_8552_formal.jpeg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D10</span>
+                </div>
+                <h4>Prasad K G</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/DSC_8535_formal.jpeg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D11</span>
+                </div>
+                <h4>Preetha S</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/Suresh_formal.jpeg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D12</span>
+                </div>
+                <h4>Suresha P</h4><div class="director-role">Director</div>
+            </div>
+
+            <div class="director-card">
+                <div class="director-photo">
+                    <img src="images/Thaniyappa_formal.jpeg" alt="Director" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <span class="director-initials" style="display:none;">D13</span>
+                </div>
+                <h4>Thanniyappa</h4><div class="director-role">Director</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Enquiry -->
+    <section class="enquiry" id="contact">
+        <div class="section-header">
+            <h2 class="section-title">Send Us an <span>Enquiry</span></h2>
+            <p class="section-subtitle">We'd love to hear from you — fill out the form or reach us directly</p>
+        </div>
+        <div class="enquiry-wrapper">
+
+            <!-- Contact Info -->
+            <div class="enquiry-info">
+                <h3>Get in Touch</h3>
+                <p>Have a question about membership, loans, deposits, or any of our services? Send us a message and our team will get back to you as soon as possible.</p>
+
+                <div class="enquiry-contact-item">
+                    <div class="eq-icon">📍</div>
+                    <span>St. Jockim Building near Shree Duragamikka Temple main road, Kadaba</span>
+                </div>
+                <div class="enquiry-contact-item">
+                    <div class="eq-icon">📞</div>
+                    <a href="tel:+919980496533">+91 9980496533</a>
+                </div>
+                <div class="enquiry-contact-item">
+                    <div class="eq-icon">📧</div>
+                    <a href="mailto:thekadaba@tktptscredit.com">thekadaba@tktptscredit.com</a>
+                </div>
+                <div class="enquiry-contact-item">
+                    <div class="eq-icon">⏰</div>
+                    <span>Mon – Sat: 9:30 AM – 5:00 PM</span>
+                </div>
+            </div>
+
+            <!-- Enquiry Form -->
+            <div class="enquiry-form-box">
+                <h3>📩 Enquiry Form</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eq-name">Full Name *</label>
+                        <input type="text" id="eq-name" placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="eq-phone">Phone Number *</label>
+                        <input type="tel" id="eq-phone" placeholder="+91 XXXXX XXXXX">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="eq-email">Email Address *</label>
+                    <input type="email" id="eq-email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="eq-subject">Subject / Service Interested In</label>
+                    <select id="eq-subject">
+                        <option value="">-- Select a subject --</option>
+                        <option>Membership Enquiry</option>
+                        <option>Fixed Deposit (FD)</option>
+                        <option>Recurring Deposit (RD)</option>
+                        <option>Monthly Income Scheme (MIS)</option>
+                        <option>Gold Loan</option>
+                        <option>Property Loan</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eq-message">Your Message *</label>
+                    <textarea id="eq-message" placeholder="Write your enquiry here..."></textarea>
+                </div>
+                <button class="enquiry-submit-btn" onclick="submitEnquiry()">Submit Enquiry →</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About TPTSC</h3>
+                <p>The Tax Payers & Tax Savers Credit Co-operative Society Limited is committed to providing excellent financial services to our members.</p>
+                <p><strong>Reg. No:</strong> TPTSC/2000/12345</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#benefits">Membership Benefits</a></li>
+                    <li><a href="#committee">Our Committee</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>📍 St. Jockim Building, near Shree Duragamikka Temple, Kadaba</p>
+                <p>📞 +91 9980496533</p>
+                <p>📧 <a href="mailto:thekadaba@tktptscredit.com" style="color:rgba(255,255,255,0.8);text-decoration:none;">thekadaba@tktptscredit.com</a></p>
+                <p>⏰ Mon – Sat: 9:30 AM – 5:00 PM</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Stay connected with us on social media</p>
+                <div style="display:flex;gap:1rem;font-size:1.5rem;margin-top:1rem;">
+                    <a href="#">📘</a><a href="#">🐦</a><a href="#">📷</a><a href="#">💼</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Tax Payers & Tax Savers Credit Co-operative Society Limited. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
