@@ -786,19 +786,19 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="eq-name">Full Name *</label>
-                        <input type="text" id="eq-name" placeholder="Your full name">
+                        <input type="text" id="eq-name" placeholder="Your full name" required>
                     </div>
                     <div class="form-group">
                         <label for="eq-phone">Phone Number *</label>
-                        <input type="tel" id="eq-phone" placeholder="+91 XXXXX XXXXX">
+                        <input type="tel" id="eq-phone" placeholder="+91 XXXXX XXXXX" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="eq-email">Email Address *</label>
-                    <input type="email" id="eq-email" placeholder="your@email.com">
+                    <input type="email" id="eq-email" placeholder="your@email.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="eq-subject">Subject / Service Interested In</label>
+                    <label for="eq-subject">Subject / Service Interested In</label required>
                     <select id="eq-subject">
                         <option value="">-- Select a subject --</option>
                         <option>Membership Enquiry</option>
@@ -812,7 +812,7 @@
                 </div>
                 <div class="form-group">
                     <label for="eq-message">Your Message *</label>
-                    <textarea id="eq-message" placeholder="Write your enquiry here..."></textarea>
+                    <textarea id="eq-message" placeholder="Write your enquiry here..." required></textarea>
                 </div>
                 <button class="enquiry-submit-btn" onclick="submitEnquiry()">Submit Enquiry →</button>
             </div>
