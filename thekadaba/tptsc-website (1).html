@@ -790,16 +790,16 @@
                     </div>
                     <div class="form-group">
                         <label for="eq-phone">Phone Number *</label>
-                        <input type="tel" id="eq-phone" placeholder="+91 XXXXX XXXXX" required>
+                        <input type="tel" id="eq-phone" placeholder="+91 XXXXX XXXXX" pattern="[0-9]{10}" maxlength="10" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="eq-email">Email Address *</label>
-                    <input type="email" id="eq-email" placeholder="your@email.com" required>
+                    <input type="email" id="eq-email" placeholder="your@email.com"  pattern=".+@gmail\.com" required>
                 </div>
                 <div class="form-group">
                     <label for="eq-subject">Subject / Service Interested In</label required>
-                    <select id="eq-subject">
+                    <select id="eq-subject" required>
                         <option value="">-- Select a subject --</option>
                         <option>Membership Enquiry</option>
                         <option>Fixed Deposit (FD)</option>
