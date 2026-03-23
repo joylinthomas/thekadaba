@@ -365,6 +365,13 @@
             <div class="logo-text">
                 <div class="logo-title">The Kadaba Tax Payers & Tax Savers</div>
                 <div class="logo-subtitle">Credit Co-operative Society Limited</div>
+                <p>Empowering Your Tax Journey</p>
+                <style>
+                    p{
+                        color: #ffe88c;
+                        font-size: 12px;
+                    }
+                </style>
             </div>
         </div>
         <ul class="nav-links" id="navLinks">
@@ -373,7 +380,8 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#committee">Committee</a></li>
-            <li style="margin-left:1.2rem;"><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Contact</a></li><br>
+            <!-- <li style="margin-left:1.2rem;"><a href="#contact">Contact</a></li> -->
         </ul>
         <div class="nav-right">
             <button class="member-login-btn">Member Login</button>
@@ -429,10 +437,9 @@
             }
             var subject = document.getElementById('eq-subject').value || 'General Enquiry';
             var body = 'Name: ' + name + '\nPhone: ' + phone + '\nEmail: ' + email + '\nSubject: ' + subject + '\n\nMessage:\n' + message;
-            window.location.href = 'mailto:thekadaba@tktptscredit.com?subject=Enquiry: ' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            window.location.href = 'mailto:thekadaba@tktptscredit.com?subject=Enquiry:' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         }
     </script>
-
     <!-- Hero -->
     <section class="hero" id="home">
         <div class="hero-content">
